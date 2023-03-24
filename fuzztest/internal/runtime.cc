@@ -157,7 +157,7 @@ void OnFailure::PrintReport(absl::FormatRawSink out) const {
   absl::Format(out, "%s", separator);
 }
 
-#if defined(__linux__)
+#if 0 
 
 struct OldSignalHandler {
   int signum;
