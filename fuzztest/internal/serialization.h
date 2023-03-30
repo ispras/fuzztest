@@ -232,7 +232,7 @@ struct IRObject {
       return std::nullopt;
     } else if constexpr (is_dynamic_container_v<T>) {
       auto elems = Subs();
-      if (!elems) return std::nullopt;
+      if (!elems || !elems->size()) return std::nullopt;
 
       T out;
       for (const auto& elem : *elems) {
