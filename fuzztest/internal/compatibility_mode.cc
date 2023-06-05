@@ -41,6 +41,10 @@ ExternalEngineCallback* GetExternalEngineCallback() {
 extern "C" size_t LLVMFuzzerCustomMutator(uint8_t* data, size_t size,
                                           size_t max_size, unsigned int seed);
 
+int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
+    return 0;
+}
+
 size_t LLVMFuzzerCustomMutator(uint8_t* data, size_t size, size_t max_size,
                                unsigned int seed) {
   ExternalEngineCallback* callback = GetExternalEngineCallback();
