@@ -65,7 +65,7 @@ ExternalEngineCallback* GetExternalEngineCallback();
 
 // LLVMFuzzerTestOneInput with empty body to be compatible with
 // aflpp_driver
-extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
+__attribute__((weak)) int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
   return 0;
 }
 
