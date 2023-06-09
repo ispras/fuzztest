@@ -90,9 +90,11 @@ int FuzzTestExternalEngineAdaptor::RunInFuzzingMode(int* argc, char*** argv) {
   static bool driver_started = false;
   FUZZTEST_INTERNAL_CHECK(!driver_started, "Driver started more than once!");
   driver_started = true;
+#ifdef PATCH_ARGS_FOR_AFL
   // We need to patch argc and argv to make afl persistent mode work.
-  *argc -= 1;
-  *argv += 1;
+  (*argv)[1] = (*argv)[*argc - 1];
+  *argc = 2;
+#endif
   LLVMFuzzerRunDriver(argc, argv, [](const uint8_t* data, size_t size) -> int {
     GetExternalEngineCallback()->RunOneInputData(
         std::string_view(reinterpret_cast<const char*>(data), size));
